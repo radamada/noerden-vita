@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOERDEN VITA — Cântarul Inteligent</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================
+       RESET & VARIABLES
+       ============================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --sage: #7A9E7E;
+      --sage-light: #A8C5AB;
+      --sage-dark: #4E6E52;
+      --cream: #F7F3ED;
+      --cream-warm: #EDE7DD;
+      --olive: #5C6B4F;
+      --earth: #8B7355;
+      --earth-light: #C4AD8F;
+      --charcoal: #2C2C2C;
+      --text: #3A3A3A;
+      --text-light: #6B6B6B;
+      --white: #FFFFFF;
+      --accent: #B8D4BA;
+      --green-glow: rgba(122, 158, 126, 0.15);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.7;
+      font-weight: 400;
+      overflow-x: hidden;
+    }
+
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.4s;
+    }
+
+    .nav.scrolled {
+      background: rgba(247, 243, 237, 0.92);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
+      padding: 12px 32px;
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 2.5px;
+      color: var(--charcoal);
+      text-transform: uppercase;
+    }
+
+    .nav-cta {
+      background: var(--sage-dark);
+      color: var(--white);
+      padding: 10px 28px;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-cta:hover {
+      background: var(--olive);
+    }
+
+
+    /* ============================================
+       HERO SECTION
+       ============================================ */
+    .hero {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 48px 60px;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(168, 197, 171, 0.3), transparent),
+        radial-gradient(ellipse 60% 50% at 80% 80%, rgba(196, 173, 143, 0.15), transparent),
+        var(--cream);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .hero-text {
+      max-width: 600px;
+      z-index: 1;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      margin-bottom: 28px;
+      animation: fadeDown 0.8s ease-out;
+    }
+
+    .brand-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--sage);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      line-height: 1.15;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+      animation: fadeUp 0.8s ease-out 0.15s both;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--sage-dark);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--text-light);
+      margin-bottom: 14px;
+      animation: fadeUp 0.8s ease-out 0.3s both;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 24px 0 32px;
+      animation: fadeUp 0.8s ease-out 0.45s both;
+    }
+
+    .hero-tag {
+      background: var(--white);
+      border: 1px solid var(--accent);
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      color: var(--sage-dark);
+      font-weight: 500;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-light);
+      max-width: 500px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.8s ease-out 0.5s both;
+    }
+
+    .hero-image-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      animation: fadeUp 1s ease-out 0.4s both;
+    }
+
+    .hero-image-glow {
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(
+        circle,
+        rgba(168, 197, 171, 0.35) 0%,
+        rgba(184, 212, 186, 0.15) 40%,
+        transparent 70%
+      );
+      border-radius: 50%;
+      filter: blur(40px);
+      z-index: 0;
+    }
+
+    .hero-image-wrapper img {
+      width: 100%;
+      max-width: 460px;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.15));
+      animation: float 6s ease-in-out infinite;
+    }
+
+
+    /* ============================================
+       CTA BUTTON (global)
+       ============================================ */
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--sage-dark);
+      color: var(--white);
+      padding: 18px 40px;
+      border-radius: 100px;
+      font-size: 1.02rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 0 4px 24px rgba(78, 110, 82, 0.25);
+      animation: fadeUp 0.8s ease-out 0.6s both;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-btn:hover {
+      background: var(--olive);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(78, 110, 82, 0.35);
+    }
+
+    .cta-btn svg {
+      transition: transform 0.3s;
+    }
+
+    .cta-btn:hover svg {
+      transform: translateX(3px);
+    }
+
+
+    /* ============================================
+       SECTIONS — COMMON STYLES
+       ============================================ */
+    section {
+      padding: 100px 24px;
+      width: 100%;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 20px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--sage-light);
+      display: inline-block;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      line-height: 1.2;
+      color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--sage-dark);
+    }
+
+
+    /* ============================================
+       PROBLEM SECTION
+       ============================================ */
+    .problem {
+      background: var(--white);
+      position: relative;
+    }
+
+    .problem::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    }
+
+    .problem-intro {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--charcoal);
+      text-align: center;
+      margin-bottom: 48px;
+      line-height: 1.4;
+    }
+
+    .problem-intro em {
+      color: var(--sage-dark);
+      font-style: italic;
+    }
+
+    .problem-context {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--text-light);
+      font-size: 1.05rem;
+    }
+
+    .problem-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .problem-item {
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .problem-item:hover {
+      border-color: var(--earth-light);
+    }
+
+    .problem-icon {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, var(--earth-light), var(--earth));
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--white);
+      font-size: 16px;
+    }
+
+    .problem-item p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Truth box */
+    .truth-box {
+      background: linear-gradient(135deg, var(--cream), var(--cream-warm));
+      border-radius: var(--radius);
+      padding: 48px;
+      text-align: center;
+      border: 1px solid var(--earth-light);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .truth-box::before {
+      content: '\201C';
+      font-family: 'DM Serif Display', serif;
+      font-size: 120px;
+      color: var(--sage-light);
+      opacity: 0.3;
+      position: absolute;
+      top: -10px;
+      left: 24px;
+      line-height: 1;
+    }
+
+    .truth-box h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      color: var(--charcoal);
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .truth-box h3 em {
+      color: var(--sage-dark);
+      font-style: italic;
+    }
+
+    .truth-box p {
+      color: var(--text-light);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      line-height: 1.7;
+    }
+
+
+    /* ============================================
+       SOLUTION SECTION
+       ============================================ */
+    .solution {
+      background: var(--cream);
+    }
+
+    .solution-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .solution-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .solution-image-inner {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .solution-image-inner img {
+      width: 100%;
+      filter: drop-shadow(0 16px 48px rgba(0, 0, 0, 0.12));
+    }
+
+    .solution-image-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 110%;
+      height: 110%;
+      border: 2px dashed var(--sage-light);
+      border-radius: 50%;
+      opacity: 0.4;
+      animation: spin 30s linear infinite;
+    }
+
+    .solution-intro {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 16px;
+    }
+
+    /* Indicators grid */
+    .indicators-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 40px;
+    }
+
+    .indicator {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid rgba(122, 158, 126, 0.15);
+      transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .indicator:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px var(--green-glow);
+      border-color: var(--sage-light);
+    }
+
+    .indicator-check {
+      width: 28px;
+      height: 28px;
+      background: linear-gradient(135deg, var(--sage-light), var(--sage));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .indicator-check svg {
+      width: 14px;
+      height: 14px;
+      color: var(--white);
+    }
+
+    .indicator span {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .sync-note {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 32px;
+      border-left: 4px solid var(--sage);
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+
+    /* ============================================
+       WHY IT MATTERS SECTION
+       ============================================ */
+    .why-matters {
+      background: var(--white);
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .benefit-card {
+      background: var(--cream);
+      border-radius: var(--radius);
+      padding: 36px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s;
+    }
+
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--sage-light), var(--sage));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .benefit-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    .benefit-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--sage-light);
+      margin-bottom: 14px;
+      opacity: 0.6;
+    }
+
+    .benefit-card p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .control-statement {
+      text-align: center;
+      margin-top: 56px;
+      padding: 40px;
+    }
+
+    .control-statement p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .control-statement strong {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.8rem;
+      color: var(--sage-dark);
+    }
+
+
+    /* ============================================
+       OBJECTIONS SECTION
+       ============================================ */
+    .objections {
+      background: linear-gradient(180deg, var(--cream) 0%, var(--cream-warm) 100%);
+    }
+
+    .objection-cards {
+      display: grid;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .objection-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 24px;
+      align-items: start;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+      transition: all 0.3s;
+    }
+
+    .objection-card:hover {
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .objection-q {
+      width: 48px;
+      height: 48px;
+      background: var(--cream);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--sage);
+    }
+
+    .objection-card h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .objection-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+
+    /* ============================================
+       FOR WHOM SECTION
+       ============================================ */
+    .for-whom {
+      background: var(--white);
+    }
+
+    .persona-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .persona {
+      background: var(--cream);
+      border-radius: var(--radius-sm);
+      padding: 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.3s;
+    }
+
+    .persona:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+    }
+
+    .persona-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent), var(--sage));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+
+    .persona p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+
+    /* ============================================
+       OFFER SECTION
+       ============================================ */
+    .offer {
+      background: var(--cream);
+    }
+
+    .offer-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .offer-product {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .offer-product img {
+      width: 100%;
+      max-width: 300px;
+      filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.1));
+    }
+
+    .offer-product-label {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: var(--sage-dark);
+      text-align: center;
+    }
+
+    .offer-box {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 48px 40px;
+      border: 1px solid var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--sage-light), var(--sage-dark), var(--sage-light));
+    }
+
+    .offer-box h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      color: var(--charcoal);
+      margin-bottom: 28px;
+    }
+
+    .offer-box h3 em {
+      color: var(--sage-dark);
+      font-style: italic;
+    }
+
+    .offer-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .offer-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.93rem;
+      color: var(--text);
+    }
+
+    .offer-feature .check {
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .offer-feature .check svg {
+      width: 12px;
+      height: 12px;
+      color: var(--sage-dark);
+    }
+
+    .price-tag {
+      margin: 32px 0;
+      text-align: center;
+    }
+
+    .price-tag .price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.2rem;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .price-tag .price-sub {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin-top: 8px;
+    }
+
+    .offer-box .cta-btn {
+      width: 100%;
+      justify-content: center;
+      animation: none;
+    }
+
+
+    /* ============================================
+       IMAGINE SECTION
+       ============================================ */
+    .imagine {
+      background: linear-gradient(135deg, var(--sage-dark) 0%, var(--olive) 100%);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .imagine::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FFFFFF' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .imagine .container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .imagine .section-label {
+      color: var(--accent);
+    }
+
+    .imagine .section-label::before {
+      background: var(--accent);
+    }
+
+    .imagine-scenario {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+
+    .imagine-results {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .imagine-stat {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--radius-sm);
+      padding: 20px 28px;
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .imagine-stat .val {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .imagine-stat .desc {
+      font-size: 0.85rem;
+      opacity: 0.75;
+    }
+
+    .imagine-mood {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      margin-top: 32px;
+      line-height: 1.4;
+    }
+
+    .imagine-mood em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+
+    /* ============================================
+       FINAL CTA SECTION
+       ============================================ */
+    .final-cta {
+      background: var(--white);
+      text-align: center;
+      padding: 120px 24px;
+      position: relative;
+    }
+
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .final-cta .container {
+      max-width: 650px;
+    }
+
+    .final-text {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .final-tagline {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      color: var(--charcoal);
+      margin-top: 48px;
+      line-height: 1.3;
+    }
+
+    .final-tagline em {
+      color: var(--sage-dark);
+      font-style: italic;
+    }
+
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      background: var(--charcoal);
+      color: rgba(255, 255, 255, 0.5);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    footer .brand-footer {
+      color: var(--white);
+      font-weight: 600;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+
+    /* ============================================
+       ANIMATIONS
+       ============================================ */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-12px); }
+    }
+
+    @keyframes spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+
+    /* ============================================
+       RESPONSIVE — TABLET
+       ============================================ */
+    @media (max-width: 900px) {
+      .hero {
+        padding: 100px 24px 60px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-text {
+        max-width: 100%;
+      }
+
+      .hero-tags {
+        justify-content: center;
+      }
+
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-image-wrapper {
+        order: -1;
+      }
+
+      .hero-image-wrapper img {
+        max-width: 280px;
+      }
+
+      .solution-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .solution-image {
+        order: -1;
+      }
+
+      .solution-image-inner {
+        max-width: 220px;
+        margin: 0 auto;
+      }
+
+      .offer-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-product img {
+        max-width: 200px;
+      }
+    }
+
+
+    /* ============================================
+       RESPONSIVE — MOBILE
+       ============================================ */
+    @media (max-width: 768px) {
+      section {
+        padding: 72px 20px;
+      }
+
+      .objection-card {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-features {
+        grid-template-columns: 1fr;
+      }
+
+      .offer-box {
+        padding: 36px 24px;
+      }
+
+      .truth-box {
+        padding: 36px 24px;
+      }
+
+      .imagine-results {
+        flex-direction: column;
+      }
+
+      .final-cta {
+        padding: 80px 20px;
+      }
+
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .persona-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    /* ============================================
+       RESPONSIVE — SMALL MOBILE
+       ============================================ */
+    @media (max-width: 480px) {
+      .problem-list {
+        grid-template-columns: 1fr;
+      }
+
+      .indicators-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-tags {
+        gap: 8px;
+      }
+
+      .hero-tag {
+        font-size: 0.78rem;
+        padding: 6px 16px;
+      }
+
+      .nav {
+        padding: 14px 16px;
+      }
+
+      .nav.scrolled {
+        padding: 10px 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ==========================================
+       NAVIGATION
+       ========================================== -->
+  <nav class="nav" id="nav">
+    <div class="nav-brand">NOERDEN VITA</div>
+    <a href="#comanda" class="nav-cta">Comandă acum</a>
+  </nav>
+
+
+  <!-- ==========================================
+       HERO
+       ========================================== -->
+  <section class="hero">
+    <div class="hero-inner">
+
+      <div class="hero-text">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          NOERDEN VITA
+        </div>
+
+        <h1>Înțelege ce se întâmplă <em>cu adevărat</em> în corpul tău — nu doar câte kilograme ai.</h1>
+
+        <p class="hero-subtitle">13 indicatori - 10 secunde - Direct la tine acasă</p>
+
+        <div class="hero-tags">
+          <span class="hero-tag">Fără abonament</span>
+          <span class="hero-tag">Fără programări la nutriționist</span>
+          <span class="hero-tag">Fără iluzii</span>
+        </div>
+
+        <p class="hero-desc">Vezi compoziția reală a corpului tău direct pe telefon și începe să iei decizii bazate pe date, nu pe frustrări.</p>
+
+        <a href="#comanda" class="cta-btn">
+          Comandă NOERDEN VITA
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <div class="hero-image-glow"></div>
+        <img src="cantar-corporal-smart-noerden-vita.png" alt="NOERDEN VITA — Cântar inteligent" />
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       PROBLEM
+       ========================================== -->
+  <section class="problem">
+    <div class="container">
+
+      <div class="reveal">
+        <p class="problem-intro">Ai observat că după 40 de ani… <em>corpul nu mai răspunde la fel?</em></p>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <p class="problem-context">Mănânci aproape la fel. Poate chiar mai puțin. Și totuși:</p>
+      </div>
+
+      <div class="problem-list reveal reveal-delay-2">
+        <div class="problem-item">
+          <div class="problem-icon">⚡</div>
+          <p>Burta nu mai dispare, oricât ai încerca.</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon">🔋</div>
+          <p>Energia scade vizibil de la o zi la alta.</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon">📊</div>
+          <p>Cântarul oscilează 1–2 kg fără nicio explicație.</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon">❓</div>
+          <p>Nu înțelegi CE se întâmplă de fapt.</p>
+        </div>
+      </div>
+
+      <div class="truth-box reveal">
+        <h3>Greutatea nu este problema.<br><em>Compoziția corporală este.</em></h3>
+        <p>Poți cântări la fel ca acum 5 ani… dar să ai mai puțină masă musculară și mai multă grăsime viscerală — exact tipul de grăsime asociat cu diabet și boli cardiovasculare. Și un cântar de 50 RON nu are cum să-ți arate asta.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       SOLUTION
+       ========================================== -->
+  <section class="solution">
+    <div class="container">
+
+      <div class="solution-header reveal">
+        <div>
+          <span class="section-label">Soluția</span>
+          <h2 class="section-title">Ce face diferit <em>NOERDEN VITA?</em></h2>
+          <p class="solution-intro">Transformă cântărirea într-un mini-laborator personal. Tehnologia BIA (Bioelectrical Impedance Analysis) măsoară 13 indicatori esențiali în doar 10 secunde.</p>
+        </div>
+        <div class="solution-image">
+          <div class="solution-image-inner">
+            <div class="solution-image-ring"></div>
+            <img src="cantar-corporal-smart-noerden-vita.png" alt="NOERDEN VITA" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Indicators -->
+      <div class="indicators-grid">
+        <div class="indicator reveal">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>% grăsime corporală</span>
+        </div>
+        <div class="indicator reveal reveal-delay-1">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>Grăsime viscerală (scor de risc)</span>
+        </div>
+        <div class="indicator reveal">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>Masă musculară</span>
+        </div>
+        <div class="indicator reveal reveal-delay-1">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>Masă osoasă</span>
+        </div>
+        <div class="indicator reveal">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>Nivel de hidratare</span>
+        </div>
+        <div class="indicator reveal reveal-delay-1">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>Rată metabolică bazală</span>
+        </div>
+        <div class="indicator reveal">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>Vârstă metabolică</span>
+        </div>
+        <div class="indicator reveal reveal-delay-1">
+          <div class="indicator-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+          <span>+ alți indicatori esențiali</span>
+        </div>
+      </div>
+
+      <div class="sync-note reveal">
+        Toate se sincronizează automat în aplicație, în limba română, unde vezi trend-uri clare în timp — nu fluctuații zilnice care te demoralizează.
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       WHY IT MATTERS
+       ========================================== -->
+  <section class="why-matters">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="section-label">De ce contează</span>
+        <h2 class="section-title">De ce contează asta <em>pentru tine?</em></h2>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <div class="benefit-num">01</div>
+          <p>Poți avea aceeași greutate, dar mai puțină grăsime și mai mult mușchi — iar asta contează enorm.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-1">
+          <div class="benefit-num">02</div>
+          <p>Poți vedea dacă o dietă îți scade masa musculară — înainte să fie prea târziu.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-2">
+          <div class="benefit-num">03</div>
+          <p>Poți urmări grăsimea viscerală — riscul major de îmbolnăvire pe care nu-l vezi în oglindă.</p>
+        </div>
+        <div class="benefit-card reveal reveal-delay-3">
+          <div class="benefit-num">04</div>
+          <p>Poți înțelege de ce eforturile tale chiar funcționează — chiar și când greutatea stagnează.</p>
+        </div>
+      </div>
+
+      <div class="control-statement reveal">
+        <p>Nu mai ești pe întuneric. Nu mai reacționezi emoțional la un număr.</p>
+        <strong>Ai control.</strong>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       OBJECTIONS
+       ========================================== -->
+  <section class="objections">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="section-label">Întrebări frecvente</span>
+        <h2 class="section-title">„Nu știu dacă <em>e pentru mine…</em>"</h2>
+        <p style="color: var(--text-light); margin-bottom: 8px;">Hai să clarificăm direct nelămuririle pe care probabil le ai:</p>
+      </div>
+
+      <div class="objection-cards">
+        <div class="objection-card reveal">
+          <div class="objection-q">?</div>
+          <div>
+            <h4>„249 RON e mult pentru un cântar."</h4>
+            <p>Un cântar simplu arată un singur număr. NOERDEN VITA îți arată 13 indicatori + trend-uri + aplicație dedicată. Un nutriționist costă 150–300 RON per ședință. Aici ai monitorizare zilnică, acasă, pentru întreaga familie.</p>
+          </div>
+        </div>
+
+        <div class="objection-card reveal reveal-delay-1">
+          <div class="objection-q">?</div>
+          <div>
+            <h4>„Nu știu cât e de precis."</h4>
+            <p>Monitorizarea trend-ului în timp este mai valoroasă decât precizia absolută de laborator. Ce contează este direcția — iar aplicația îți arată exact asta.</p>
+          </div>
+        </div>
+
+        <div class="objection-card reveal reveal-delay-2">
+          <div class="objection-q">?</div>
+          <div>
+            <h4>„Nu sunt un om tehnic."</h4>
+            <p>Te urci pe cântar. Deschizi aplicația. Și vezi rezultatul instant. Asta e tot.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       FOR WHOM
+       ========================================== -->
+  <section class="for-whom">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="section-label">Publicul ideal</span>
+        <h2 class="section-title">Pentru cine este <em>NOERDEN VITA?</em></h2>
+      </div>
+
+      <div class="persona-list">
+        <div class="persona reveal">
+          <div class="persona-icon">🌿</div>
+          <p>Pentru femeia care vrea să înțeleagă ce se întâmplă după 40 de ani</p>
+        </div>
+        <div class="persona reveal reveal-delay-1">
+          <div class="persona-icon">💚</div>
+          <p>Pentru mama care vrea să prevină, nu să trateze</p>
+        </div>
+        <div class="persona reveal reveal-delay-2">
+          <div class="persona-icon">📋</div>
+          <p>Pentru femeia organizată care vrea date clare, nu presupuneri</p>
+        </div>
+        <div class="persona reveal reveal-delay-3">
+          <div class="persona-icon">👨‍👩‍👧</div>
+          <p>Pentru cupluri care vor să monitorizeze sănătatea familiei (utilizatori nelimitați)</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       OFFER
+       ========================================== -->
+  <section class="offer" id="comanda">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="section-label">Oferta</span>
+      </div>
+
+      <div class="offer-layout">
+
+        <!-- Product image -->
+        <div class="offer-product reveal">
+          <img src="cantar-corporal-smart-noerden-vita.png" alt="NOERDEN VITA" />
+          <span class="offer-product-label">NOERDEN VITA</span>
+        </div>
+
+        <!-- Offer details -->
+        <div class="offer-box reveal reveal-delay-1">
+          <h3>Ce obții <em>concret</em></h3>
+
+          <div class="offer-features">
+            <div class="offer-feature">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span>Monitorizare zilnică a compoziției corporale</span>
+            </div>
+            <div class="offer-feature">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span>Trend-uri clare, ușor de urmărit</span>
+            </div>
+            <div class="offer-feature">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span>Aplicație în limba română</span>
+            </div>
+            <div class="offer-feature">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span>Design premium, pentru orice baie</span>
+            </div>
+            <div class="offer-feature">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span>24 luni garanție</span>
+            </div>
+            <div class="offer-feature">
+              <div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+              <span>Fără abonamente ascunse</span>
+            </div>
+          </div>
+
+          <div class="price-tag">
+            <div class="price">249 RON</div>
+            <div class="price-sub">O singură investiție. Fără costuri recurente.</div>
+          </div>
+
+          <a href="#" class="cta-btn">
+            Comandă NOERDEN VITA
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       IMAGINE
+       ========================================== -->
+  <section class="imagine">
+    <div class="container">
+
+      <div class="reveal">
+        <span class="section-label">Imaginează-ți</span>
+        <h2 class="section-title" style="color: var(--white);">Imaginează-ți <em style="color: var(--accent);">asta:</em></h2>
+      </div>
+
+      <div class="reveal">
+        <p class="imagine-scenario">
+          Te urci pe cântar. Greutatea e aproape la fel ca luna trecută.<br>
+          Dar aplicația arată:
+        </p>
+      </div>
+
+      <div class="imagine-results reveal">
+        <div class="imagine-stat">
+          <span class="val">–2%</span>
+          <span class="desc">grăsime corporală</span>
+        </div>
+        <div class="imagine-stat">
+          <span class="val">–1 nivel</span>
+          <span class="desc">grăsime viscerală</span>
+        </div>
+        <div class="imagine-stat">
+          <span class="val">+1.3 kg</span>
+          <span class="desc">masă musculară</span>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <p class="imagine-mood">
+          În loc să te demoralizezi… <em>zâmbești.</em><br>
+          Pentru că știi că efortul tău contează.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       FINAL CTA
+       ========================================== -->
+  <section class="final-cta">
+    <div class="container reveal">
+
+      <span class="section-label">Fă primul pas</span>
+      <h2 class="section-title">Începe să iei decizii pe baza <em>datelor,</em> nu pe frustrare.</h2>
+
+      <p class="final-text">
+        Dacă vrei să înțelegi ce se întâmplă în corpul tău — nu doar câte kilograme ai…<br>
+        dacă vrei să vezi progres chiar și atunci când greutatea stagnează…<br>
+        și dacă vrei un instrument simplu care îți oferă control pe termen lung…
+      </p>
+
+      <a href="#comanda" class="cta-btn" style="font-size: 1.1rem; padding: 20px 52px;">
+        Comandă NOERDEN VITA astăzi
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <p class="final-tagline">
+        Transformă cântarul din dușmanul tău…<br>
+        în <em>cel mai bun aliat</em> al sănătății tale.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer>
+    <div class="brand-footer">NOERDEN VITA</div>
+    <p>&copy; 2025 Toate drepturile rezervate.</p>
+  </footer>
+
+
+  <!-- ==========================================
+       SCRIPTS
+       ========================================== -->
+  <script>
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.12,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    reveals.forEach((el) => observer.observe(el));
+
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
